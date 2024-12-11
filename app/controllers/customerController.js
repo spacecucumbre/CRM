@@ -1,0 +1,64 @@
+const Customer = require('../models/CustomerModel');
+
+module.exports = {
+    index: (req, res) => {
+        Customer.find({})
+            .populate('address')
+            .lean()
+            .then((customers) => {
+                res.render('customerViews/customers', { customers: customers })
+            }).catch((err) => {
+                res.send(err)
+            })
+    },
+    create: (req, res) => {
+        const newCustomer = new Customer(req.body);
+        newCustomer.save()
+            .then(() => {
+                res.redirect('/customers');
+            })
+            .catch((err) => {
+                res.send(err);
+            });
+
+    },
+    customer: (req, res) => {
+        Customer.findById(req.params.id)
+            .populate('address')
+            .lean()
+            .then((customer) => {
+                res.render('customerViews/singleCustomer', customer)
+            })
+            .catch((err) => {
+                res.send(err);
+            });
+    },
+    update: (req, res) => {
+        Customer.findByIdAndUpdate(req.params.id, req.body)  
+            .then((customer) => {
+                res.redirect('/customers/' + customer._id)
+            })
+            .catch((err) => {
+                res.send(err);
+            });
+
+    },
+    delete: (req, res) => {
+        Customer.findByIdAndDelete(req.params.id)
+            .then(() => {
+                res.redirect('/customers')
+            })
+            .catch((err) => {
+                res.send(err);
+            })
+    },
+    editForm: (req, res) => {
+        Customer.findById(req.params.id)
+            .then((customer) => {
+                res.render('customerViews/editCustomer', customer);
+            })
+            .catch((err) => {
+                res.send(err);
+            });
+    }
+}

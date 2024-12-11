@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Customer page</h2>
+
+    <div class="card mb-3">
+        <div class="card-body">
+
+            <h2 class="card-title">{{name}}</h2>
+            <p class="card-text">Adres:</p>
+            <p class="card-text">{{address.street}}</p>
+            <p class="card-text">{{address.zipcode}} {{address.city}}</p>
+            <p class="card-text">NIP: {{nip}}</p>
+
+            
+            <a href="/customers/edit/{{_id}}" class="btn btn-primary">Edytuj</a>
+            <a href="/customers/delete/{{_id}}" class="btn btn-danger">Usun</a>
+
+        </div>
+    </div>
+
+    {{!-- tabela z akcjami --}}
+
+    <a href="/actions/add/{{customer._id}}" class="btn btn-success">Dodaj akcje</a> {{!-- prawdopodobnie nie dziala --}}
+</div>
