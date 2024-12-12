@@ -1,5 +1,6 @@
 const Customer = require('../models/CustomerModel');
 
+
 module.exports = {
     index: (req, res) => {
         Customer.find({})
@@ -23,8 +24,8 @@ module.exports = {
 
     },
     customer: (req, res) => {
-        Customer.findById(req.params.id)
-            .populate('address')
+            Customer.findById(req.params.id)
+            .populate('address', 'actions', 'contactDate actionType description')
             .lean()
             .then((customer) => {
                 res.render('customerViews/singleCustomer', customer)
@@ -32,6 +33,7 @@ module.exports = {
             .catch((err) => {
                 res.send(err);
             });
+            
     },
     update: (req, res) => {
         Customer.findByIdAndUpdate(req.params.id, req.body)  
@@ -56,6 +58,17 @@ module.exports = {
         Customer.findById(req.params.id)
             .then((customer) => {
                 res.render('customerViews/editCustomer', customer);
+            })
+            .catch((err) => {
+                res.send(err);
+            });
+    },
+    action: (req, res) => {
+        Customer.findById(req.params.id)
+            .populate('address')
+            .lean()
+            .then((customer) => {
+                res.render('actionViews/addAction', customer)
             })
             .catch((err) => {
                 res.send(err);

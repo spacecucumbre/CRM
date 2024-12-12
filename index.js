@@ -9,9 +9,8 @@ const authMiddleware = require("./app/middlewares/authMiddleware");
 mongoose.connect("mongodb://127.0.0.1:27017/project-2");
 
 
-const customerRouter = require('./app/router/customerRouter');
-const actionRouter = require('./app/router/actionRouter');	
-const userRouter = require('./app/router/userRouter')
+const customerRouter = require('./app/router/customerRouter');	
+const userRouter = require('./app/router/userRouter');
 
 
 
@@ -24,7 +23,6 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/customers', authMiddleware, customerRouter);
-app.use('/action', authMiddleware, actionRouter);
 app.use('/user', userRouter)
 
 
@@ -33,6 +31,6 @@ app.get("/login", function (_req, res) {
 });
 
 
-app.listen(5050, function () {
+app.listen(8080, function () {
     console.log("Serwer Node.js działa");
 });

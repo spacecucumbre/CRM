@@ -4,7 +4,6 @@
     <div class="card mb-3">
         <div class="card-body">
             <h2 class="card-title">{{name}}</h2>
-            <p class="card-text">Email: {{email}}</p>
             <p class="card-text">Adres:</p>
             <p class="card-text">{{address.street}}</p>
             <p class="card-text">{{address.zipcode}} {{address.city}}</p>
@@ -15,8 +14,8 @@
 
     <h2>Dodaj akcje</h2>
 
-    <form action="/action/add" method="POST">
-    {{!-- <input type="hidden" name="customerId" value="{{customer._id}}"> --}}
+    <form action="/customers/{{_id}}/actions/add" method="POST">
+    <input type="hidden" name="customerId" value="{{_id}}">
         <div class="mb-3">
             <label for="contactDate" class="from-label">Data kontaktu: </label>
             <input type="date" class="form-control" id="contactDate" name="contactDate" required>

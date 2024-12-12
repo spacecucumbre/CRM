@@ -3,17 +3,16 @@ const Customer = require('../models/CustomerModel');
 
 module.exports = {
     create: (req, res) => {
-        const { actionType, description, customerId, contactDate } = req.body;
-        const newAction = new Action({ actionType, description, contactDate, customerId });
-        newAction.save()
-        .then(()=>{
-            res.redirect(`/customers/${customerId}`);   //sciezka?????
-        })
-            //Customer.updateOne({}, {}) // update Customer - add action to the action array -> co przekazac?
+        console.log(req.body);
+        const newAction = new Action(req.body);
+        newAction.save();
+        console.log('newAction._id:', newAction._id);
+
+        Customer.updateOne({ _id: req.params.id }, { $push: { actions: newAction._id } })
             .catch((err) => {
                 console.error(err);
                 res.send(err);
             });
-        
+        res.redirect(`/customers/${req.params.id}/actions/add`); //wyswietl jakis alert bo slabo
     },
 }

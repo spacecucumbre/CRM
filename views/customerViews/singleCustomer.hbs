@@ -5,19 +5,44 @@
         <div class="card-body">
 
             <h2 class="card-title">{{name}}</h2>
-            <p class="card-text">Adres:</p>
             <p class="card-text">{{address.street}}</p>
             <p class="card-text">{{address.zipcode}} {{address.city}}</p>
             <p class="card-text">NIP: {{nip}}</p>
 
-            
+
             <a href="/customers/edit/{{_id}}" class="btn btn-primary">Edytuj</a>
             <a href="/customers/delete/{{_id}}" class="btn btn-danger">Usun</a>
 
         </div>
     </div>
 
-    {{!-- tabela z akcjami --}}
+    <a href="/customers/{{_id}}/actions/add" class="btn btn-success">Dodaj akcje</a> 
 
-    <a href="/actions/add/{{customer._id}}" class="btn btn-success">Dodaj akcje</a> {{!-- prawdopodobnie nie dziala --}}
+    {{!-- tabela z akcjami --}}
+    
+  
+
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Data kontaktu</th>
+                <th scope="col">Sposob kontaktu</th>
+                <th scope="col">Opis</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each customer.actions}}
+            <tr>
+                <th scope="row">{{@index}}</th>
+                <td>{{contactDate}}</td>
+                <td>{{actionType}}</td>
+                <td>{{description}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>

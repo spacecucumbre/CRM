@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const customerController = require('../controllers/customerController');
+const actionController = require('../controllers/actionController');
 
 router.get('/', customerController.index);
 
@@ -11,13 +12,16 @@ router.get('/add', (_req, res)=>{
 
 router.post('/add', customerController.create);
 
-router.get('/:id', customerController.customer);
-
 router.get('/edit/:id', customerController.editForm);
 
 router.post('/edit/:id', customerController.update);
 
 router.get('/delete/:id', customerController.delete);
 
+router.get('/:id/actions', customerController.customer);
+
+router.get('/:id/actions/add', customerController.action);
+
+router.post('/:id/actions/add', actionController.create);
 
 module.exports = router;

@@ -8,7 +8,7 @@ const Customer = new mongoose.Schema({
         zipcode: { type: String, required: true },
       },
     nip: Number,
-    action: [{
+    actions: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Action'
     }]
