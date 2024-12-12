@@ -13,6 +13,6 @@ module.exports = {
                 console.error(err);
                 res.send(err);
             });
-        res.redirect(`/customers/${req.params.id}/actions/add`); //wyswietl jakis alert bo slabo
+        res.redirect(`/customers/${req.params.id}/actions`);
     },
 }

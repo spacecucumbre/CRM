@@ -25,7 +25,7 @@ module.exports = {
     },
     customer: (req, res) => {
             Customer.findById(req.params.id)
-            .populate('address', 'actions', 'contactDate actionType description')
+            .populate('actions')
             .lean()
             .then((customer) => {
                 res.render('customerViews/singleCustomer', customer)
